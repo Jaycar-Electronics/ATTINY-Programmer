@@ -1,11 +1,10 @@
 
 ## ATtiny Programmer Shield
 
-The best thing about at the ATtiny85 IC is undoubtedly its size, but this also makes it difficult to program. No matter how gently you pull it out of its socket, it still seems like the legs get bent (pro-tip: keep the IC in a [socket](https://jaycar.com.au/p/PI6500)
-if you are continually moving it to and from a programmer, then the socket takes the wear and tear).
-
-To make our job even easier, we put together an ATtiny Programmer Shield, using a ZIF socket to ensure that the pins are not subject to excessive forces, and wired directly to the SPI pins on the Arduino so that any Arduino main board can be used. There's no reason a similar idea can't be applied to even an ATMega328 IC (using a [28 pin ZIF socket](https://jaycar.com.au/p/PI6483)
+The best thing about at the ATtiny85 IC is undoubtedly its size, but this also makes it difficult to program. To make our job even easier, we've put together an ATtiny Programmer Shield, using a ZIF socket to ensure that the pins are not subject to excessive forces, and wired directly to the SPI pins on the Arduino.
 instead). We've added some testing LEDs to the pins that aren't used for programming, so you can quickly test that the chip is working too.
+
+* There's no reason a similar idea can't be applied to even an ATMega328 IC (using a [28 pin ZIF socket](https://jaycar.com.au/p/PI6483)
 
 ![](images/final.png)
 
@@ -24,9 +23,20 @@ To test it out, you'll also need:
 
 |Qty| Code | Description |
 |---|---|---|
-|1 | [XC4410](http://jaycar.com.au/p/XC4410) | Uno main board (or any other arduino)
-|1 | [PI6480](http://jaycar.com.au/p/ZZ8721) | ATTiny 85 IC
+|1 | [XC4410](http://jaycar.com.au/p/XC4410) | Uno main board (or any other arduino) to act as the programmer
+|1 | [PI6480](http://jaycar.com.au/p/ZZ8721) | ATTiny 85 IC to be programmed
 
+## Connection Table
+|ATtiny85 Pin|Connection
+|---|---
+|1|To D10 via black wire
+|2|To red LED and GND via 470 Ohm resistor
+|3|To red LED and GND via 470 Ohm resistor
+|4|To GND via bus on shield
+|5|To MOSI on ISP Header via brown wire
+|6|To MISO on ISP Header via red wire
+|7|To SCK on ISP Header vis orange wire
+|8|To 5V via bus on shield
 
 ## Construction:
 
@@ -52,16 +62,7 @@ Here's a summary of the wiring connections:
 
 ![](images/step6.png)
 
-|ATtiny85 Pin|Connection
-|---|---
-|1|To D10 via black wire
-|2|To red LED and GND via 470 Ohm resistor
-|3|To red LED and GND via 470 Ohm resistor
-|4|To GND via bus on shield
-|5|To MOSI on ISP Header via brown wire
-|6|To MISO on ISP Header via red wire
-|7|To SCK on ISP Header vis orange wire
-|8|To 5V via bus on shield
+
 That completes the construction. The shield should not be attached to the main board yet, as the capacitor is designed to prevent the main board entering programming mode. The main board should be programmed with the sketch from File>Examples>11.ArduinoISP>ArduinoISP sketch, and once that has been successfully done, the main board can be attached to the programming shield. You will also need to set the programmer type as 'Arduino as ISP' from the Tools menu, and the Serial port will be the same as that of the main board.
 
 ## Usage:
